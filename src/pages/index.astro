@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Flare from '../components/Flare.astro';
+import Portada from '../components/acts/Portada.astro';
+import Ingredientes from '../components/acts/Ingredientes.astro';
+import Fuego from '../components/acts/Fuego.astro';
+import Plato from '../components/acts/Plato.astro';
+import Chef from '../components/acts/Chef.astro';
+import Contacto from '../components/acts/Contacto.astro';
+---
+<BaseLayout title="Chef Luis Alba" description="Chef Luis Alba, cocina de autor en Ciudad de México: experiencias y eventos, restaurante, consultoría y clases.">
+  <Header />
+  <main>
+    <Portada />
+    <div class="flare-mark" data-flare="0.75" aria-hidden="true"></div>
+    <Ingredientes />
+    <Fuego />
+    <div class="flare-mark" data-flare="1" aria-hidden="true"></div>
+    <Plato />
+    <div class="flare-mark" data-flare="0.55" aria-hidden="true"></div>
+    <Chef />
+    <Contacto />
+  </main>
+  <Flare />
+</BaseLayout>

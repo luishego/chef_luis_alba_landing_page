@@ -1,0 +1,41 @@
+/* Animaciones por scroll.
+   Cada acto con escenario fijo es una .scene alta con un .stage sticky adentro.
+   Los elementos animados declaran su tramo con --s (inicio) y --l (largo), en fracciones del acto.
+   1) Navegadores con animation-timeline: la línea de tiempo es la vista de la escena.
+   2) Firefox: un script de <1 KB escribe --p (0..1) en cada escena y el CSS
+      convierte ese avance en un retraso negativo de una animación pausada.
+   3) prefers-reduced-motion: no hay escenarios fijos ni movimiento. */
+
+.scene { position: relative; }
+.stage {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+  overflow: hidden;
+}
+
+[data-anim] {
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  animation-delay: calc(-1s * clamp(0, (var(--p, 0) - var(--s, 0)) / var(--l, 1), 0.999));
+}
+
+@supports (animation-timeline: view()) {
+  .scene { view-timeline-name: --scene; view-timeline-axis: block; }
+  .scene [data-anim] {
+    animation-play-state: running;
+    animation-delay: 0s;
+    animation-duration: auto;
+    animation-timeline: --scene;
+    animation-range:
+      contain calc(var(--s, 0) * 100%)
+      contain calc((var(--s, 0) + var(--l, 1)) * 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene { height: auto !important; }
+  .stage { position: relative; height: auto; overflow: visible; }
+  [data-anim] { animation: none !important; }
+}

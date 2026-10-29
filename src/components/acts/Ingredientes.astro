@@ -1,0 +1,153 @@
+---
+import { ingredientes } from '../../content/site';
+const n = ingredientes.length;
+---
+<section class="scene ing-scene band on-band" id="ingredientes" aria-labelledby="ing-title">
+  <h2 class="sr-only" id="ing-title">Los ingredientes: cuatro formas de trabajar con el chef</h2>
+  <div class="stage">
+    <div class="ing-grid wrap">
+      <div class="panels">
+        {ingredientes.map((it, i) => (
+          <article class="panel" data-anim style={`--s:${i / n};--l:${1 / n}`}>
+            <p class="eyebrow">{`0${i + 1} / 0${n} · ${it.servicio}`}</p>
+            <h3 class="display panel-title">{it.titulo[0]} <em>{it.titulo[1]}</em></h3>
+            <p class="panel-text">{it.texto}</p>
+            <p class="panel-note">{it.nota}</p>
+            <a class="link-arrow" href="#contacto" data-servicio={it.id}>{it.cta} ↗</a>
+            <img class="rm-sil" src={it.img} width={it.w} height={it.h} alt="" loading="lazy" />
+          </article>
+        ))}
+      </div>
+      <div class="pan-area">
+        <div class="pan">
+          <img src="media/sarten-carbon.webp" width="1800" height="1336" alt="Dibujo al carboncillo de un sartén visto desde arriba" loading="lazy" />
+          <div class="target">
+            {ingredientes.map((it, i) => (
+              <div class="drop" style={`--s:${i / n};--l:${1 / n}`}>
+                <span class="splash" data-anim style={`--s:${i / n};--l:${1 / n}`}></span>
+                <span class="ring" data-anim style={`--s:${i / n};--l:${1 / n}`}></span>
+                <img class="sil" data-anim style={`--s:${i / n};--l:${1 / n}`} src={it.img} width={it.w} height={it.h} alt={`Dibujo al carboncillo: ${it.ingrediente.toLowerCase()}`} decoding="async" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="ing-labels">
+          {ingredientes.map((it, i) => (
+            <p class="ing-label" data-anim style={`--s:${i / n};--l:${1 / n}`}><span>{it.ingrediente}</span></p>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ing-scene { height: calc(100vh + 250vh); height: calc(100svh + 250svh); }
+  @media (max-width: 820px) { .ing-scene { height: calc(100svh + 200svh); } }
+  .ing-scene .stage {
+    background: var(--band);
+  }
+  .ing-grid {
+    height: 100%; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center; gap: 24px; padding-top: 70px;
+  }
+
+  /* Paneles de texto: apilados en el mismo lugar, cada uno visible en su cuarto del acto */
+  .panels { display: grid; min-width: 0; }
+  .panel {
+    grid-area: 1 / 1; display: flex; flex-direction: column; gap: 18px; align-items: flex-start;
+    animation-name: panel-in-out; max-width: 30rem;
+  }
+  .panel-title { font-size: calc(clamp(2.4rem, 4.6vw, 4.2rem) * var(--display-scale)); color: var(--band-ink); }
+  .panel-title em { display: block; }
+  .panel-text { margin: 0; font-size: 1.05rem; color: var(--band-muted); max-width: 34ch; }
+  .panel-note { margin: 0; font-size: .85rem; color: var(--band-muted); font-style: italic; }
+  .panel .link-arrow { color: var(--band-accent); }
+  .rm-sil { display: none; }
+
+  @keyframes panel-in-out {
+    0% { opacity: 0; transform: translateY(26px); visibility: visible; }
+    14% { opacity: 1; transform: translateY(0); }
+    84% { opacity: 1; transform: translateY(0); }
+    97% { opacity: 0; transform: translateY(-22px); }
+    100% { opacity: 0; transform: translateY(-22px); visibility: hidden; }
+  }
+
+  /* Sartén y caída */
+  .pan-area { position: relative; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .pan { position: relative; width: min(100%, 820px); aspect-ratio: 1800 / 1336; }
+  /* El papel del dibujo es blanco: con multiply se funde con el fondo de la paleta */
+  .pan > img {
+    width: 100%; height: 100%; mix-blend-mode: multiply;
+    -webkit-mask-image: radial-gradient(ellipse 82% 76% at 52% 50%, #000 66%, transparent 100%);
+    mask-image: radial-gradient(ellipse 82% 76% at 52% 50%, #000 66%, transparent 100%);
+  }
+  /* centro del cuenco: 73.1 % del ancho, 51.5 % del alto; radio 27.6 % del ancho */
+  .target { position: absolute; left: 73.1%; top: 51.5%; width: 0; height: 0; }
+  .drop { position: absolute; left: 0; top: 0; }
+  .sil {
+    position: absolute; left: 0; top: 0; width: clamp(200px, 23vw, 330px); height: auto; max-width: none;
+    animation-name: drop; filter: drop-shadow(0 18px 16px rgba(30, 26, 22, .22));
+  }
+  .splash, .ring {
+    position: absolute; left: 0; top: 0; border-radius: 50%; pointer-events: none;
+    width: clamp(220px, 26vw, 380px); aspect-ratio: 1;
+  }
+  /* Al caer: una nube de polvo de carbón y un trazo circular */
+  .splash { background: radial-gradient(circle, rgba(40, 36, 32, .38), rgba(40, 36, 32, .12) 45%, transparent 70%); mix-blend-mode: multiply; animation-name: splash; }
+  .ring { border: 2px solid rgba(40, 36, 32, .55); animation-name: ring; }
+
+  @keyframes drop {
+    0% { opacity: 0; transform: translate(-50%, -50%) translateY(-78vh) rotate(-28deg) scale(1.12); }
+    12% { opacity: 1; }
+    30% { transform: translate(-50%, -50%) translateY(-28vh) rotate(-10deg) scale(1.04); }
+    62% { opacity: 1; transform: translate(-50%, -50%) translateY(-24vh) rotate(7deg) scale(1.02); }
+    82% { opacity: 1; transform: translate(-50%, -50%) translateY(0) rotate(20deg) scale(.58); }
+    90% { opacity: 0; transform: translate(-50%, -50%) translateY(1.5vh) rotate(24deg) scale(.48); }
+    100% { opacity: 0; transform: translate(-50%, -50%) translateY(1.5vh) rotate(24deg) scale(.48); }
+  }
+  @keyframes splash {
+    0%, 78% { opacity: 0; transform: translate(-50%, -50%) scale(.5); }
+    86% { opacity: 1; transform: translate(-50%, -50%) scale(.95); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+  }
+  @keyframes ring {
+    0%, 80% { opacity: 0; transform: translate(-50%, -50%) scale(.3); }
+    86% { opacity: .9; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.05); }
+  }
+
+  .ing-labels { display: grid; justify-items: center; }
+  .ing-label {
+    grid-area: 1 / 1; margin: 0; display: flex; gap: 12px; align-items: center;
+    font-size: .8rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--band-muted);
+    animation-name: panel-in-out;
+  }
+
+  @media (max-width: 820px) {
+    .ing-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; align-content: center; gap: 8px; padding-top: 80px; }
+    .pan-area { order: -1; }
+    .pan { width: min(118%, 560px); margin-left: -12%; }
+    .panel { gap: 12px; }
+    .panel-title { font-size: calc(clamp(2rem, 9vw, 2.8rem) * var(--display-scale)); }
+    .sil { width: 40vw; }
+    @keyframes drop {
+      0% { opacity: 0; transform: translate(-50%, -50%) translateY(-46vh) rotate(-28deg) scale(1.1); }
+      12% { opacity: 1; }
+      30% { transform: translate(-50%, -50%) translateY(-12vh) rotate(-10deg) scale(1.02); }
+      62% { opacity: 1; transform: translate(-50%, -50%) translateY(-9vh) rotate(7deg) scale(1); }
+      82% { opacity: 1; transform: translate(-50%, -50%) translateY(0) rotate(20deg) scale(.58); }
+      90% { opacity: 0; transform: translate(-50%, -50%) translateY(1vh) rotate(24deg) scale(.48); }
+      100% { opacity: 0; transform: translate(-50%, -50%) translateY(1vh) rotate(24deg) scale(.48); }
+    }
+  }
+
+  /* Sin movimiento: lista estática con la silueta en cada panel */
+  @media (prefers-reduced-motion: reduce) {
+    .ing-grid { grid-template-columns: minmax(0, 1fr); padding-block: 96px 64px; }
+    .panels { gap: 56px; }
+    .panel { grid-area: auto; opacity: 1; }
+    .rm-sil { display: block; width: min(320px, 70vw); height: auto; }
+    .pan-area { display: none; }
+  }
+</style>

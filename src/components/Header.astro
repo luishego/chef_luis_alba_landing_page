@@ -1,0 +1,39 @@
+<header class="top">
+  <div class="top-inner">
+    <a class="wordmark" href="#inicio">Luis Alba<small>Chef · Cocina de autor</small></a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#ingredientes">Servicios</a>
+      <a href="#fuego">Cómo trabajo</a>
+      <a href="#plato">Platos</a>
+      <a href="#chef">El chef</a>
+    </nav>
+    <a class="btn btn-primary" href="#contacto">Cotiza tu evento</a>
+  </div>
+</header>
+
+<style>
+  .top {
+    position: fixed; inset: 0 0 auto; z-index: 30;
+    padding-top: calc(14px + env(safe-area-inset-top, 0px)); padding-bottom: 14px;
+    padding-left: max(24px, env(safe-area-inset-left, 0px));
+    padding-right: max(24px, env(safe-area-inset-right, 0px));
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--night) 86%, transparent), color-mix(in srgb, var(--night) 55%, transparent));
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 28px; }
+  .wordmark {
+    font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; line-height: 1;
+    color: var(--cream); text-decoration: none; white-space: nowrap;
+  }
+  .wordmark small {
+    display: block; font-family: var(--font-body); font-size: .58rem; font-weight: 600;
+    letter-spacing: .28em; text-transform: uppercase; color: var(--muted); margin-top: 5px;
+  }
+  .nav { display: flex; gap: 26px; margin-left: auto; font-size: .9rem; color: var(--muted); }
+  .nav a { text-decoration: none; }
+  .nav a:hover { color: var(--cream); }
+  .top .btn { padding: 11px 18px; font-size: .85rem; }
+  @media (max-width: 900px) { .nav { display: none; } .top .btn { margin-left: auto; } }
+  @media (max-width: 420px) { .top .btn { padding: 10px 12px; font-size: .78rem; } }
+</style>

@@ -1,0 +1,56 @@
+* { box-sizing: border-box; }
+html { background: var(--night); scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--night); color: var(--cream);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.wrap {
+  max-width: 1240px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+}
+
+/* Tipografía de marca */
+.display {
+  margin: 0; font-family: var(--font-display); font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking); line-height: 1.02; text-wrap: balance;
+}
+.display em { font-style: italic; font-weight: var(--display-italic-weight); color: var(--accent); }
+.eyebrow {
+  display: flex; align-items: center; gap: 14px; margin: 0;
+  font-size: .72rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--accent);
+}
+.eyebrow::before { content: ""; width: 34px; height: 1px; background: currentColor; }
+.on-band .eyebrow { color: var(--band-accent); }
+.on-band .display em { color: var(--band-accent); }
+
+/* Botones */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font: 600 .95rem/1 var(--font-body); text-decoration: none; white-space: nowrap;
+  padding: 15px 26px; border-radius: 2px; border: 1px solid transparent; cursor: pointer;
+  transition: transform .2s ease, background-color .3s ease, color .3s ease, border-color .3s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-ghost { border-color: var(--line); color: var(--cream); background: transparent; }
+.btn-ghost:hover { border-color: var(--cream); }
+.on-band .btn-ghost { border-color: var(--band-line); color: var(--band-ink); }
+.on-band .btn-ghost:hover { border-color: var(--band-ink); }
+.link-arrow { font-weight: 600; font-size: .92rem; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+
+/* Etiqueta de material temporal */
+.temp-tag {
+  display: inline-block; font: 600 .62rem/1 var(--font-body); letter-spacing: .18em; text-transform: uppercase;
+  padding: 6px 8px; border: 1px dashed currentColor; border-radius: 2px; opacity: .8;
+}
+
+.band { background: var(--band); color: var(--band-ink); }
+.band-2 { background: var(--band-2); color: var(--band-ink); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

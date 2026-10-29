@@ -1,0 +1,8 @@
+{
+  // Cloudflare Workers con assets estáticos: sirve lo que genera `npm run build` en ./dist
+  "name": "chef-luis-alba",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}

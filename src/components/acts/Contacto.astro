@@ -1,0 +1,120 @@
+---
+import { preguntas, ingredientes } from '../../content/site';
+---
+<section class="contacto" id="contacto" aria-labelledby="contacto-title">
+  <div class="contacto-inner wrap">
+    <div class="c-copy">
+      <p class="eyebrow">Contacto</p>
+      <h2 class="display c-title" id="contacto-title">Cuéntame qué <em>se cocina.</em></h2>
+      <p class="c-text">Escríbeme por WhatsApp o deja tus datos y te respondo en menos de 24 horas.</p>
+      <div class="c-direct">
+        <p><span>WhatsApp</span><b>[+52 55 0000 0000]</b></p>
+        <p><span>Correo</span><b>contacto@chefluisalba.com</b></p>
+      </div>
+      <div class="faq">
+        <h3 class="faq-title">Preguntas frecuentes</h3>
+        {preguntas.map((p) => (
+          <details>
+            <summary>{p.q}</summary>
+            <p>{p.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+    <form class="c-form" id="c-form" novalidate>
+      <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" required /></div>
+      <div class="row">
+        <div class="field"><label for="f-tel">Teléfono</label><input id="f-tel" name="tel" type="tel" autocomplete="tel" /></div>
+        <div class="field"><label for="f-correo">Correo</label><input id="f-correo" name="correo" type="email" autocomplete="email" /></div>
+      </div>
+      <div class="field">
+        <label for="f-servicio">¿Qué te interesa?</label>
+        <select id="f-servicio" name="servicio">
+          {ingredientes.map((it) => <option value={it.id}>{it.servicio}</option>)}
+        </select>
+      </div>
+      <div class="row">
+        <div class="field"><label for="f-fecha">Fecha tentativa</label><input id="f-fecha" name="fecha" type="date" /></div>
+        <div class="field"><label for="f-personas">Personas</label><input id="f-personas" name="personas" type="number" min="1" inputmode="numeric" /></div>
+      </div>
+      <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" rows="4"></textarea></div>
+      <label class="privacy" for="f-priv"><input id="f-priv" type="checkbox" required /> Acepto el [aviso de privacidad].</label>
+      <button class="btn btn-primary" type="submit">Enviar</button>
+      <p class="c-status" id="c-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  <footer class="foot wrap">
+    <span>Luis Alba · Chef</span><span>Propuesta de diseño · Textos e imágenes temporales</span>
+  </footer>
+</section>
+
+<script is:inline>
+  (function () {
+    var form = document.getElementById('c-form');
+    var status = document.getElementById('c-status');
+    var select = document.getElementById('f-servicio');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      status.textContent = 'Es una propuesta: el formulario todavía no envía mensajes.';
+    });
+    // Los enlaces de cada servicio preseleccionan la opción del formulario
+    document.querySelectorAll('[data-servicio]').forEach(function (a) {
+      a.addEventListener('click', function () { select.value = a.getAttribute('data-servicio'); });
+    });
+  })();
+</script>
+
+<style>
+  .contacto {
+    background: radial-gradient(60% 50% at 10% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%), var(--night);
+    padding-block: 120px 40px;
+  }
+  .contacto-inner { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 64px; align-items: start; }
+  .c-copy { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+  .c-title { font-size: calc(clamp(2.2rem, 4vw, 3.6rem) * var(--display-scale)); }
+  .c-title em { display: block; }
+  .c-text { margin: 0; color: var(--muted); max-width: 38ch; }
+  .c-direct { display: grid; gap: 8px; }
+  .c-direct p { margin: 0; display: flex; gap: 14px; align-items: baseline; }
+  .c-direct span { font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); width: 84px; }
+  .c-direct b { font-weight: 500; user-select: all; }
+  .faq { margin-top: 12px; }
+  .faq-title { margin: 0 0 6px; font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  details { border-top: 1px solid var(--line); }
+  details:last-child { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--accent); }
+  details[open] summary::after { content: "–"; }
+  details p { margin: 0 0 14px; color: var(--muted); font-size: .95rem; }
+
+  .c-form {
+    display: flex; flex-direction: column; gap: 16px; min-width: 0;
+    padding: 32px; border: 1px solid var(--line); background: color-mix(in srgb, var(--cream) 4%, transparent);
+  }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  label { font-size: .78rem; font-weight: 600; letter-spacing: .04em; color: var(--muted); }
+  input, select, textarea {
+    font: inherit; color: var(--cream); background: transparent; width: 100%;
+    border: 0; border-bottom: 1px solid var(--line); padding: 8px 0; border-radius: 0;
+  }
+  select option { color: #1C1B19; }
+  input:focus, select:focus, textarea:focus { outline: none; border-bottom-color: var(--accent); }
+  .privacy { display: flex; gap: 10px; align-items: center; font-weight: 500; letter-spacing: 0; }
+  .privacy input { width: auto; }
+  .c-form .btn { align-self: flex-start; }
+  .c-status { margin: 0; min-height: 1.4em; color: var(--accent); font-size: .9rem; }
+  .foot {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 96px; padding-block: 24px;
+    border-top: 1px solid var(--line); font-size: .78rem; color: var(--muted);
+  }
+  @media (max-width: 820px) {
+    .contacto { padding-block: 72px 16px; }
+    .foot { margin-top: 48px; }
+    .c-form { gap: 12px; }
+    .contacto-inner { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .c-form { padding: 22px; }
+    .row { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

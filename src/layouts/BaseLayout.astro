@@ -1,0 +1,46 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/scroll.css';
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="claude:viewport-fit-sides" content="cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1A120D" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&display=swap" />
+  </head>
+  <body>
+    <slot />
+    <!-- Respaldo de animaciones por scroll (Firefox): escribe --p en cada escena -->
+    <script is:inline>
+      (function () {
+        if (window.CSS && CSS.supports && CSS.supports('animation-timeline: view()')) return;
+        var scenes = [].slice.call(document.querySelectorAll('.scene'));
+        if (!scenes.length) return;
+        var ticking = false;
+        function update() {
+          ticking = false;
+          var vh = innerHeight;
+          for (var i = 0; i < scenes.length; i++) {
+            var r = scenes[i].getBoundingClientRect();
+            var span = Math.max(1, r.height - vh);
+            var p = Math.min(1, Math.max(0, -r.top / span));
+            scenes[i].style.setProperty('--p', p.toFixed(4));
+          }
+        }
+        function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+        addEventListener('scroll', onScroll, { passive: true });
+        addEventListener('resize', onScroll);
+        update();
+      })();
+    </script>
+  </body>
+</html>

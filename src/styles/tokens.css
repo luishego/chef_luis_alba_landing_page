@@ -1,0 +1,28 @@
+/* Tokens de marca · Fuego y origen.
+   La landing es deliberadamente oscura en los actos de fuego y clara en los de mesa;
+   no depende del tema claro/oscuro del sistema. */
+:root {
+  color-scheme: dark;
+  --night: #1A120D;      /* fondo de los actos de fuego */
+  --ink: #2A1E17;        /* carbón */
+  --cream: #F4EADB;      /* crema: texto sobre oscuro y fondo claro */
+  --muted: #E2C9A6;      /* arena: texto secundario sobre oscuro */
+  --accent: #E3A63A;     /* maíz: botones y énfasis sobre oscuro */
+  --on-accent: #2A1E17;
+  --second: #8C3B22;     /* barro */
+  --band: #F4EADB;
+  --band-2: #EBDDC6;
+  --band-ink: #2A1E17;
+  --band-muted: #6B5A4C;
+  --band-accent: #8C3B22;
+  --line: rgba(244, 234, 219, 0.18);
+  --band-line: #E2C9A6;
+  --spill: rgba(255, 120, 45, 0.34);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --display-weight: 560;
+  --display-italic-weight: 500;
+  --display-tracking: -0.02em;
+  --display-scale: 1;
+  --font-body: 'Archivo', Arial, sans-serif;
+}

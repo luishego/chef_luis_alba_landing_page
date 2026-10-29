@@ -6,7 +6,7 @@ const n = platos.length;
   <div class="stage">
     <div class="plato-grid wrap">
       <div class="plato-copy">
-        <p class="eyebrow">El plato</p>
+        <p class="eyebrow">Platos insignia</p>
         <h2 class="display plato-title" id="plato-title">Lo que <em>aparece.</em></h2>
         <ol class="stops">
           {platos.map((p, i) => (
@@ -17,7 +17,8 @@ const n = platos.length;
             </li>
           ))}
         </ol>
-        <p class="plato-foot">Platos de Pinolo · Fotos temporales</p>
+        <p class="plato-note">Son los platos insignia del chef, no la carta actual: en Pinolo los platos cambian cada mes. Los de este mes, en <a href="https://www.instagram.com/pinolo_restaurante" target="_blank" rel="noopener">@pinolo_restaurante</a>.</p>
+        <p class="plato-foot">Fotos temporales</p>
       </div>
       <div class="frame">
         {platos.map((p, i) => (
@@ -44,6 +45,8 @@ const n = platos.length;
   .stop-n { grid-row: span 2; color: var(--accent); font-size: .8rem; font-weight: 600; letter-spacing: .1em; padding-top: 6px; }
   .stop-name { font-family: var(--font-display); font-size: calc(1.8rem * var(--display-scale)); line-height: 1.1; }
   .stop-note { font-size: .9rem; color: var(--muted); }
+  .plato-note { margin: 0; max-width: 44ch; font-size: .92rem; color: var(--muted); }
+  .plato-note a { color: var(--cream); text-decoration: none; border-bottom: 1px solid var(--accent); }
   .plato-foot { margin: 0; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
   @keyframes stop-on {
     0% { opacity: .32; }
@@ -65,7 +68,9 @@ const n = platos.length;
 
   @media (max-width: 820px) {
     .plato-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; gap: 18px; align-content: center; padding-top: 80px; }
-    .frame { order: -1; height: 46svh; }
+    .frame { order: -1; height: 42svh; }
+    .plato-foot { display: none; }
+    .plato-note { font-size: .86rem; }
     .plato-title { display: none; }
     .stop { padding: 10px 0; }
     .stop-name { font-size: calc(1.4rem * var(--display-scale)); }

@@ -13,7 +13,9 @@ const n = ingredientes.length;
             <h3 class="display panel-title">{it.titulo[0]} <em>{it.titulo[1]}</em></h3>
             <p class="panel-text">{it.texto}</p>
             <p class="panel-note">{it.nota}</p>
-            <a class="link-arrow" href="#contacto" data-servicio={it.id}>{it.cta} ↗</a>
+            {'href' in it
+              ? <a class="link-arrow" href={it.href} target="_blank" rel="noopener">{it.cta} ↗</a>
+              : <a class="link-arrow" href="#contacto" data-servicio={it.id}>{it.cta} ↗</a>}
             <img class="rm-sil" src={it.img} width={it.w} height={it.h} alt="" loading="lazy" />
           </article>
         ))}

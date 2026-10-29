@@ -19,7 +19,8 @@ export const ingredientes = [
     titulo: ['Una mesa', 'propia.'],
     texto: 'La cocina del chef todos los días, con platos de temporada y técnica de autor.',
     nota: 'Pinolo · Ciudad de México',
-    cta: 'Conoce el restaurante',
+    cta: 'Pinolo en Instagram',
+    href: 'https://www.instagram.com/pinolo_restaurante',
   },
   {
     id: 'consultoria',
@@ -37,7 +38,7 @@ export const ingredientes = [
     img: 'media/ing-cilantro.webp', w: 900, h: 542,
     servicio: 'Clases',
     titulo: ['Técnica', 'para llevar.'],
-    texto: 'Talleres en grupo y contenido en redes para cocinar mejor en casa.',
+    texto: 'Talleres en grupo para cocinar mejor en casa.',
     nota: 'Lo fresco y lo básico, bien hechos, son la base de todo.',
     cta: 'Inscríbete a una clase',
   },

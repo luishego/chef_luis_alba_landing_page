@@ -25,12 +25,12 @@ src/
     Header.astro
     Flare.astro            llamarada entre actos (Canvas 2D)
     FlareGL.astro          versión WebGL anterior (respaldo, no se usa)
-    HeroLightScript.astro  luz de fuego sobre la foto de portada (WebGL)
+    HeroLightScript.astro  luz simulada sobre la foto de portada (WebGL; respaldo, no se usa)
     acts/                  Portada, Ingredientes, Fuego, Plato, Chef, Contacto
   content/site.ts          textos de servicios, pasos, platos y preguntas
   styles/                  tokens.css (paleta), base.css, scroll.css
 public/
-  media/                   fotos e ilustraciones al carbón (webp)
+  media/                   fotos, ilustraciones al carbón (webp) y video de portada (mp4)
   _headers                 caché de /media en Cloudflare
 ```
 
